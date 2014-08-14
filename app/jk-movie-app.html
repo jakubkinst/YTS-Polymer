@@ -1,0 +1,77 @@
+<link rel="import" href="bower_components/polymer/polymer.html">
+<link rel="import" href="bower_components/core-ajax/core-ajax.html">
+<link rel="import" href="bower_components/core-header-panel/core-header-panel.html">
+<link rel="import" href="bower_components/core-toolbar/core-toolbar.html">
+<link rel="import" href="bower_components/core-icon/core-icon.html">
+<link rel="import" href="bower_components/core-icons/core-icons.html">
+<link rel="import" href="bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="bower_components/paper-input/paper-input.html">
+<link rel="import" href="bower_components/paper-radio-button/paper-radio-button.html">
+<link rel="import" href="bower_components/paper-radio-group/paper-radio-group.html">
+<link rel="import" href="bower_components/paper-shadow/paper-shadow.html">
+<link rel="import" href="bower_components/paper-slider/paper-slider.html">
+<link rel="import" href="jk-movie-list.html">
+
+<polymer-element name="jk-movie-app" noscript>
+	<template>
+		<style>
+			core-toolbar {
+				background: #ffda3a;
+			}
+		</style>
+		<core-header-panel flex>
+			<core-toolbar>
+				<paper-icon-button icon="menu"></paper-icon-button>
+				<span flex>YTS Movies</span>
+				<paper-icon-button icon="more-vert"></paper-icon-button>
+			</core-toolbar>
+
+			<div style="padding:20px; min-height: 400px;" layout horizontal>
+				<div flex>
+					<h3>Movie Search</h3>
+
+					<paper-input label="search query" inputValue="{{searchQuery}}" floatingLabel block></paper-input>
+					<paper-radio-group selected="{{quality}}" block>
+						<paper-radio-button name="" label="All"></paper-radio-button>
+						<paper-radio-button name="720p" label="720p"></paper-radio-button>
+						<paper-radio-button name="1080p" label="1080p"></paper-radio-button>
+						<paper-radio-button name="3D" label="3D"></paper-radio-button>
+					</paper-radio-group>
+					<paper-radio-group selected="{{sort}}" block>
+						<paper-radio-button name="date" label="Date"></paper-radio-button>
+						<paper-radio-button name="rating" label="Rating"></paper-radio-button>
+						<paper-radio-button name="year" label="Year"></paper-radio-button>
+						<paper-radio-button name="alphabet" label="Alphabetical"></paper-radio-button>
+					</paper-radio-group>
+					<paper-radio-group selected="{{order}}" block>
+						<paper-radio-button name="asc" label=" ">
+							<core-icon icon="arrow-drop-up"></core-icon>
+						</paper-radio-button>
+						<paper-radio-button name="desc" label=" ">
+							<core-icon icon="arrow-drop-down"></core-icon>
+						</paper-radio-button>
+					</paper-radio-group>
+					<span block>Minimum Rating: <strong>{{minRating}}</strong></span>
+					<paper-slider min="0" max="9" value="{{minRating}}" snaps pin step="1"></paper-slider>
+
+				</div>
+				<div flex>
+					<jk-movie-list keywords="{{searchQuery}}" minRating="{{minRating}}" quality="{{quality}}"
+								   sort="{{sort}}" order="{{order}}"/>
+				</div>
+
+			</div>
+
+
+		</core-header-panel>
+
+	</template>
+	<script>
+		new Polymer({
+			quality: '1080p',
+			sort: 'date',
+			order: 'desc',
+			minRating: 6
+		})
+	</script>
+</polymer-element>

@@ -1,0 +1,90 @@
+<link rel="import" href="bower_components/polymer/polymer.html">
+
+<polymer-element name="jk-movie" attributes="movieTitle genre imageUrl rating year torrentUrl imdbUrl">
+	<template>
+		<style>
+			a {
+				color: #666666;
+				text-transform: uppercase;
+				font-size: 11px;
+				font-weight: bold;
+				text-decoration: none;
+			}
+
+			a:hover {
+				color: #ffda3a;
+			}
+
+			#card {
+				margin: 16px;
+				padding: 10px;
+				box-shadow: 1px 1px 2px #888888;
+				background: #ffffff;
+				border-radius: 2px;
+			}
+
+			#title {
+				font-size: 22px;
+			}
+
+			#image {
+				height: 80px;
+			}
+
+			#info {
+				padding-left: 10px;
+				padding-right: 10px;
+			}
+
+			#info > span {
+				display: block;
+			}
+
+			#genre {
+				color: #444444;
+				font-size: 12px;
+			}
+
+			#year {
+				padding-top: 10px;
+				font-size: 14px;
+			}
+
+			#rating {
+				color: #ffda3a;
+				padding: 5px;
+				font-size: 70px;
+			}
+
+			#links {
+
+			}
+		</style>
+
+		<div id="card" layout horizontal>
+			<div>
+				<img id="image" src="{{imageUrl}}">
+			</div>
+			<div flex id="info">
+				<span id="title">{{movieTitle}}</span>
+				<span id="genre">{{genre}}</span>
+				<span id="year">{{year}}</span>
+
+				<div id="links">
+					<a href="{{torrentUrl}}">Torrent</a>
+					<a href="{{imdbUrl}}" target="_blank">IMDB</a>
+				</div>
+			</div>
+			<div>
+				<span id="rating" style="opacity: {{ratingOpacity}}">{{rating}}</span>
+			</div>
+		</div>
+	</template>
+	<script>
+		new Polymer({
+			get ratingOpacity() {
+				return 0.1 * this.rating;
+			}
+		});
+	</script>
+</polymer-element>

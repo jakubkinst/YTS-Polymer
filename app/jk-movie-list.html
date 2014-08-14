@@ -1,0 +1,20 @@
+<link rel="import" href="bower_components/polymer/polymer.html">
+<link rel="import" href="bower_components/core-ajax/core-ajax.html">
+<link rel="import" href="jk-movie.html">
+
+<polymer-element name="jk-movie-list" attributes="sort order limit keywords minRating quality" noscript>
+	<template>
+		<style>
+
+		</style>
+		<core-ajax
+				url="https://yts.re/api/list.json?sort={{sort}}&order={{order}}&limit={{limit}}&keywords={{keywords}}&rating={{minRating}}&quality={{quality}}"
+				handleAs="json" auto
+				response="{{response}}"></core-ajax>
+		<template repeat="{{m in response.MovieList}}">
+			<jk-movie movieTitle="{{m.MovieTitleClean}} ({{m.Quality}})" year="{{m.MovieYear}}" genre="{{m.Genre}}"
+					  rating="{{m.MovieRating}}"
+					  imageUrl="{{m.CoverImage}}" torrentUrl="{{m.TorrentUrl}}" imdbUrl="{{m.ImdbLink}}"></jk-movie>
+		</template>
+	</template>
+</polymer-element>
